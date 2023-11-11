@@ -9,9 +9,7 @@ const url = process.env.MONGODB_URI;
 
 const mongoConnect = async () => {
     try {
-        mongoose.connect(url, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+        mongoose.connect(url, {      
     });
 
       console.log('Conexión exitosa a MongoDB ');

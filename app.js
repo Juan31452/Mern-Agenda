@@ -1,5 +1,18 @@
 import express from 'express'
 import morgan from 'morgan' 
-const app = express()
-app.use(morgan('dev'))
+import usuarioRouter from './Router/router.usuario.js'
+
+
+const app = express();
+app.use(morgan('dev'));
+app.use(express.json());//que reconozca formato json
+
+
+//se llama rutras 
+app.use('/home',usuarioRouter);
+
+// Configuración de rutas y middlewares
+app.use(express.urlencoded({ extended: false }));
+
+
 export default app
