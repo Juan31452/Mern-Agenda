@@ -9,6 +9,12 @@ app.use(morgan('dev'));
 app.use(express.json());//que reconozca formato json
 app.use(cookieParser());//CConvertir cookieen objeto json;
 
+app.use(
+    cors({
+      origin: ["http://localhost:4000", "https://app-agenda.onrender.com"],
+    })
+  );
+  
 //se llama rutras 
 app.use('/home',usuarioRouter);
 app.use('/home',diaryRouter);
