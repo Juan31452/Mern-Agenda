@@ -13,6 +13,7 @@ app.use(cookieParser());//Convertir cookieen objeto json;
 //se llama rutras 
 app.use('/home',usuarioRouter);
 app.use('/home',diaryRouter);
+console.log('Versión de Node.js:', process.version);
 
 // Configuración de rutas y middlewares
 app.use(express.urlencoded({ extended: false }));
