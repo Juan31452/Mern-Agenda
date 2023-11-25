@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {authRequered} from '../Middlewares/validateToken.js';
+import {authRequered} from '../Middlewarez/validateToken.js';
 import {
   getDiarys,
   createDiary,
