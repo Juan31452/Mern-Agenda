@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan' ;
 import usuarioRouter from './Router/router.usuario.js';
+import diaryRouter from './Router/diary.router.js'
 import cookieParser from 'cookie-parser';
 
 const app = express();
@@ -10,6 +11,7 @@ app.use(cookieParser());//CConvertir cookieen objeto json;
 
 //se llama rutras 
 app.use('/home',usuarioRouter);
+app.use('/home',diaryRouter);
 
 // Configuración de rutas y middlewares
 app.use(express.urlencoded({ extended: false }));

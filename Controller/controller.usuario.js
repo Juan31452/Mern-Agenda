@@ -4,7 +4,7 @@ import {MyToken} from '../Libs/jwt.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-// Función para agregar un nuevo usuario
+// Agregar un nuevo usuario
 export const register = async (req, res) => {
     
     const {name, phone, email, password} = req.body
@@ -35,30 +35,19 @@ export const findall  = async (req, res) => {
   try {
      const usuarios = await Usuario.find();
 
-    // jwt.sign(
-    //   {
-    //     id: usuario._id,
-    //   },
-    //   'secret123',
-    //   {expiresIn: '12h'},
-    //   (err, token) => {
-    //     if(err) console.log(err);
-    //     res.json({token});
-    //   }
-    // );
    res.json(usuarios.map(usuario => ({
    id: usuario._id,
    name: usuario.name,
    phone: usuario.phone,
    email: usuario.email,
-   password: usuario.password
+   //password: usuario.password
   })));
    } catch (error) {
     res.status(500).json({ error: 'Error al obtener usuarios' });
   }
 
 };
-
+//iniciar session
 export const login = async (req, res) => {
   try {
     const usuario = await Usuario.findOne({ email: req.body.email, password: req.body.password }).exec();
@@ -88,13 +77,14 @@ export const login = async (req, res) => {
   }
 };
 
+//Cerrar sesion
 export const logout = async (req, res) => {
   res.cookie('token',"", {
   expires: new Date(0),
   });
   return res.sendStatus(200);
 };
-
+//Ver perfil usuario
 export const profile =  async(req,res)=>{
   
   const userFound = await Usuario.findById(req.user.id)
@@ -107,6 +97,5 @@ export const profile =  async(req,res)=>{
     phone: userFound.phone,
     email: userFound.email,
   })
-  //console.log(req.user);      
-  //res.send("Profile");
+ 
 }
