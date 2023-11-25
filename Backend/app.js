@@ -3,6 +3,7 @@ import morgan from 'morgan' ;
 import usuarioRouter from './Router/router.usuario.js';
 import diaryRouter from './Router/diary.router.js'
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 const app = express();
 app.use(morgan('dev'));
