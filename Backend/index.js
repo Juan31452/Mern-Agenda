@@ -1,6 +1,7 @@
 import app from "./app.js"
 import dotenv from "dotenv";
 import mongoConnect from './Config/Database.js';
+import cors from 'cors';
 
 
 
@@ -13,6 +14,12 @@ const puerto = process.env.PORT || 3000;
 
 //Conexion a Mongodb
 mongoConnect();
+
+app.use(
+    cors({
+      origin: [puerto, "https://app-agenda.onrender.com"],
+    })
+  );
 
 //http://localhost:4000
 app.get("/",(req,res) =>{
