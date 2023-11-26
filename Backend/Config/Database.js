@@ -6,8 +6,9 @@ dotenv.config();
 
 // URL de conexión de MongoDB (obtenida desde las variables de entorno)
 const url = process.env.MONGODB_URI;
+const atlas = process.env.MONGODB_ATLAS;
 
-const mongoConnect = async () => {
+export const mongoConnect = async () => {
     try {
         mongoose.connect(url, {      
     });
@@ -18,4 +19,14 @@ const mongoConnect = async () => {
     }
   };
   
-export default mongoConnect;
+  export const mongoConnectAtlas = async () => {
+    try {
+        mongoose.connect(atlas, {      
+    });
+
+      console.log('Conexión exitosa a MongoDB ');
+    } catch (error) {
+      console.error('Error al conectar a MongoDB :', error);
+    }
+  };
+

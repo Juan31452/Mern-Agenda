@@ -1,6 +1,6 @@
 import app from "./app.js"
 import dotenv from "dotenv";
-import mongoConnect from './Config/Database.js';
+import {mongoConnect,mongoConnectAtlas} from './Config/Database.js';
 import cors from 'cors';
 
 
@@ -12,9 +12,10 @@ dotenv.config();
 const puerto = process.env.PORT || 3000; 
 // Utiliza el puerto 3000 si no se encuentra en .env
 
-//Conexion a Mongodb
-mongoConnect();
-
+//Conexion a Mongodb Local
+//mongoConnect();
+//Conexion a Mongodb Atlas
+mongoConnectAtlas()
 app.use(
     cors({
       origin: [puerto, "https://app-agenda.onrender.com"],

@@ -1,2 +1,3 @@
-node_modules
+# Ignorar archivos específicos
 .env
+
