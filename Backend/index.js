@@ -16,11 +16,6 @@ const puerto = process.env.PORT || 3000;
 //mongoConnect();
 //Conexion a Mongodb Atlas
 mongoConnectAtlas()
-app.use(
-    cors({
-      origin: [puerto, "https://app-agenda.onrender.com"],
-    })
-  );
 
 //http://localhost:4000
 app.get("/",(req,res) =>{
