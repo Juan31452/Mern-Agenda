@@ -1,3 +1,4 @@
 # Ignorar archivos específicos
+node_modules
 .env
 
