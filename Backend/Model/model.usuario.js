@@ -5,7 +5,7 @@ const usuarioSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    trim: true   
+    trim: true   //Limpiar campos vacios
   },
   phone: {
     type: String,
