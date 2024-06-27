@@ -12,22 +12,29 @@ export const register = async (req, res) => {
     try {
       const paswordencrypt = await bcrypt.hash(password , 10)
     //Creamos el objeto Usuario
-    const nuevoUsuario = new Usuario({
+    const newUser = new Usuario({
       name,
       phone,
       email,
       password :paswordencrypt
     });
 
-    console.log(nuevoUsuario); 
+    console.log(newUser); 
 
-    await nuevoUsuario.save();//Se guarda
+    await newUser.save();//Se guarda
+
+  
+    const payload = {
+     id: newUser._id, 
+  
+    };
+
     const token = await MyToken(payload)
     console.log('Token generado:', token);
     res.cookie("token", token);
     res.json({
-      id: nuevoUsuario._id,
-      name: nuevoUsuario.name,
+      id: newUser._id,
+      name: newUser.name,
       })  
 
     res.send('Registro Guardado');
