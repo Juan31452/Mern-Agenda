@@ -22,6 +22,13 @@ export const register = async (req, res) => {
     console.log(nuevoUsuario); 
 
     await nuevoUsuario.save();//Se guarda
+    const token = await MyToken(payload)
+    console.log('Token generado:', token);
+    res.cookie("token", token);
+    res.json({
+      id: nuevoUsuario._id,
+      name: nuevoUsuario.name,
+      })  
 
     res.send('Registro Guardado');
   } catch (error) {
@@ -49,26 +56,30 @@ export const findall  = async (req, res) => {
 };
 //iniciar session
 export const login = async (req, res) => {
+  const {email,password} =req.body
   try {
-    const usuario = await Usuario.findOne({ email: req.body.email, password: req.body.password }).exec();
+    const userFound = await Usuario.findOne({ email });
     dotenv.config();
 
     
-    if (!usuario) return res.status(400).json({message: "Usuario Invalido, verifique los Datos"})
+    if (!userFound) return res.status(400).json({message: "Usuario Invalido, verifique los Datos"})
     
+    const isMatch = bcrypt.compare(password,userFound.password);
+    if (!isMatch) return res.status(400).json({message: "Password Incorrecto"});
+
     const SECRET = process.env.TOKEN_SECRET;
     const payload = {
-     id: usuario._id,  
+     id: userFound._id,  
     };
 
     const token = await MyToken(payload)
     console.log('Token generado:', token);
     res.cookie("token", token);
     res.json({
-      id: usuario._id,
-      name: usuario.name,
-      phone: usuario.phone,
-      email: usuario.email,
+      id: userFound._id,
+      name: userFound.name,
+      phone: userFound.phone,
+      email: userFound.email,
       })  
       
  
